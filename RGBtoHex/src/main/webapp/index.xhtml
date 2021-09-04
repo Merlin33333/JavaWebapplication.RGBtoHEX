@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        
+        <title>RGBtoHex</title>
+    </h:head>
+    <style >
+    body {
+	background: black;
+	color: gray;
+	
+}
+</style>
+    
+<script>
+    $(document).ready(function () {
+        var padding = 20;
+        var size = 1;
+        var rainChars = 'RAINITSRAININGuiasbiubwzebf8ewqzbUIASHIUBZVEBTVBUZSNCJND';
+        var fxeffect = (Math.floor(Math.random() * 1000));
+
+        $("#a").css("font-size", size + "em");
+
+        var rainyrain = function () {
+            $("#a").offset({ top: padding });
+            $("#a").css("padding-left", fxeffect);
+            size++
+            padding++;
+            $("#a").css("font-size", size + "em");
+            if (padding > 50) {
+                padding = 20;
+                size = 1;
+
+                var digit = rainChars.charAt(Math.floor(Math.random() * rainChars.length));
+                $("#a > p").text(digit);
+            }
+        };
+
+        setInterval(rainyrain, 50);
+    });
+</script>
+    <h:body style="background-color:#{UserInputBean.hex};">
+        <h:form> 
+            <!--Text label-->
+            <h:outputLabel for="input" value="Eingabe:"/> 
+            <!--Eingabe Text Box-->
+            <h:inputText value="#{UserInputBean.inputValueRed}" id="inputValueRed"/>
+
+            <h:selectOneMenu value="#{UserInputBean.inputValueBlue}" id="inputValueBlue">
+                <f:selectItems value="#{UserInputBean.numbers}"/> 
+
+            </h:selectOneMenu>  
+
+            <h:selectOneListbox value="#{UserInputBean.inputValueGreen}" size="3" id="inputValueGreen" >
+                <f:selectItems value="#{UserInputBean.numbers}"/> 
+            </h:selectOneListbox>  
+            <!--Button ohne Controller weiterleitung-->
+            <h:commandButton value="POST ohne eigenen Controller" action="index.xhtml"/>
+
+
+
+        </h:form>
+
+    </h:body>
+</html>
+
